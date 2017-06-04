@@ -93,6 +93,7 @@ public class JsonParse {
         } else if (current == '"') {
             currentType = Type.STRING;
             fieldStart = i;
+            i++;
         } else if (Constants.isLetter(current)) {
             // Assume parsing a constant ("null", "true", "false", etc)
             currentType = Type.CONSTANT;
@@ -245,6 +246,7 @@ public class JsonParse {
                     } else if (current == '"') {
                         currentType = Type.STRING;
                         fieldStart = i;
+                        i++;
                     } else if (current == '{') {
                         stateStack.push(new State(propertyName, currentContainer, Type.OBJECT));
                         currentType = Type.OBJECT;
@@ -289,6 +291,7 @@ public class JsonParse {
 
                         currentType = Type.NAME;
                         fieldStart = i;
+                        i++;
                     } else if (current == '}') {
                         if (!stateStack.isEmpty()) {
                             State upper = stateStack.pop();
@@ -333,6 +336,7 @@ public class JsonParse {
                     } else if (current == '"') {
                         currentType = Type.STRING;
                         fieldStart = i;
+                        i++;
                     } else if (current == '{') {
                         stateStack.push(new State(null, currentContainer, Type.ARRAY));
                         currentType = Type.OBJECT;
