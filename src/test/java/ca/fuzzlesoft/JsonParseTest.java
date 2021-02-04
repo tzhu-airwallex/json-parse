@@ -30,6 +30,24 @@ public class JsonParseTest {
     }
 
     @Test
+    public void shouldParseArrayOfEmptyString() {
+        String test = "[\"\"]";
+        Assert.assertEquals("", JsonParse.list(test).get(0));
+    }
+
+    @Test
+    public void shouldParseObjectWithEmptyStringKey() {
+        String test = "{\"\": 3}";
+        Assert.assertEquals(3L, JsonParse.map(test).get(""));
+    }
+
+    @Test
+    public void shouldParseObjectWithEmptyStringValue() {
+        String test = "{\"a\": \"\"}";
+        Assert.assertEquals("", JsonParse.map(test).get("a"));
+    }
+
+    @Test
     public void shouldParseSingleCharacterStrings() {
         String test = "{\"a\":\"b\"}";
         Map<String, Object> expected = MapBuilder.init()
